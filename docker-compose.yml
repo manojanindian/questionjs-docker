@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  node-server:
+    container_name: node-server
+    image: manojanindian/private:questionjs-node-0.0.0
+    ports:
+      - "3000:3000"
+    links:
+      - mongodb
+    restart: always
+    command: node ./bin/www
+
+  mongodb:
+    container_name: mongo
+    image: mongo
+    stdin_open: true
+    tty: true
+    ports:
+      - "27017:27017"
+
+  nginx:
+    container_name: nginx-server
+    image: manojanindian/private:questionjs-nginx-0.0.0
+    restart: always
+    ports:
+      - "80:80"
+    links:
+      - node-server
+        

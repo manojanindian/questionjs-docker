@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  node-server:
+    container_name: node-server
+    image: node-server:1.0.0
+    build: ./node-server
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    volumes:
+      - ./node-server:/node-server
+      - /node-server/node_modules
+    command: nodemon -L --inspect=0.0.0.0 ./bin/www
+    links:
+      - mongodb
+
+  mongodb:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./data:/data/db
+
+  nginx:
+    container_name: nginx-server
+    image: nginx-server:1.0.0
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+      - "8080:80"
