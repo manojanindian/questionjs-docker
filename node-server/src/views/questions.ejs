@@ -1,0 +1,8 @@
+<div class="app-question-list">
+    <h1>Select a question to solve</h1>
+    <div>
+       <% for(let [index,question] of questions.entries() || []){  %>
+         <p><a href="/question/<%=question.questionId%>"><%=question.question%></a></p>
+      <%} %>
+    </div>
+ </div>

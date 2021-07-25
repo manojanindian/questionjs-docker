@@ -1,10 +1,15 @@
 var express = require('express');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const path = require('path');
+const expressLayouts = require('express-ejs-layouts');
 
 var usersRouter = require('./Routes/users.routes');
 var adminRouter = require('./Routes/admin.routes');
+var homeRouter = require('./Routes/home.routes');
+var apiRouter = require('./Routes/api.routes');
+var cmsRouter = require('./Routes/cms.routes');
 
 require("dotenv").config();
 
@@ -14,7 +19,6 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-console.log(process.env);
 
 const dbURI = process.env.dbURI;
 
@@ -29,8 +33,22 @@ mongoose
 
 mongoose.Promise = global.Promise;
 
-app.use('/api/users', usersRouter);
-app.use('/api/admin', adminRouter)
+// Static files
+app.use(express.static('src/public'));
+app.use('/css', express.static(__dirname + 'public/css'));
+app.use('/js', express.static(__dirname + 'public/js'));
+
+// Set templeting engine
+app.set('views', path.join(__dirname, 'views'));
+app.use(expressLayouts);
+app.set('layout', path.join(__dirname, 'views/layouts/main'))
+app.set('view engine', 'ejs');
+
+
+app.use('/', homeRouter);
+app.use('/api', apiRouter);
+app.use('/admin', adminRouter);
+app.use('/cms', cmsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

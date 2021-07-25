@@ -2,8 +2,8 @@ version: "3"
 
 services:
   node-server:
-    container_name: node-server
-    image: node-server:1.0.0
+    container_name: node-questionjs
+    image: node-questionjs:1.0.0
     build: ./node-server
     ports:
       - "3000:3000"
@@ -11,12 +11,13 @@ services:
     volumes:
       - ./node-server:/node-server
       - /node-server/node_modules
+    # command: nodemon -L --inspect=0.0.0.0 ./bin/www
     command: nodemon -L --inspect=0.0.0.0 ./bin/www
     links:
       - mongodb
 
   mongodb:
-    container_name: mongo
+    container_name: mongo-questionjs
     image: mongo
     ports:
       - "27017:27017"
@@ -26,8 +27,8 @@ services:
       - ./data:/data/db
 
   nginx:
-    container_name: nginx-server
-    image: nginx-server:1.0.0
+    container_name: nginx-questionjs
+    image: nginx-questionjs:1.0.0
     restart: always
     build:
       context: ./nginx

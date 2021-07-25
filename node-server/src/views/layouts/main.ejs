@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <meta name="author" content="Manoj Kumar" />
+    <meta name="description" content="Select a question and try to solve it through javascript. We will provide you a platform to practice your JavaScript knowledge." />
+    <meta name="keywords" content="JavaScript, js algorithm, js learning, js tests, javascript questions" />
+
+    <title><%-title%></title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="../css/codemirror.css">
+    <link rel="stylesheet" href="/css/blackboard.css">
+    <script type="text/javascript" src="../js/codemirror.js"></script>
+    <script type="text/javascript" src="../js/codemirror-js-mode.js"></script>
+    <script type="text/javascript" src="../js/main.js"></script>
+
+    <link rel="stylesheet" href="../css/splitterbar.css">
+    <script type="text/javascript" src="../js/splitterbar.js"></script>
+    <script type="text/javascript" src="../js/ensemble-social-share.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+          <div class="app-logo">
+            <a href="/">
+              <span>Q</span>uestion<span>js</span>
+            </a>
+          </div>
+          <div class="app-menu">
+            <% if(typeof questionId !== 'undefined'){ %>
+              <button onclick="onClickUnitTest('<%-questionId%>', `<%-question.unitTests[0].input%>`)" class="glow-on-hover">Test Your Code</button>
+            <% } %>  
+            <% if(typeof hideSelectQuestionLink === 'undefined'){ %>
+              <a class="primary" href="/questions">Select Question</a>
+            <% } %>
+          </div>
+        </header>
+        <%- body %>
+        <footer class="app-footer">
+          <div class="app-footer-wrapper">
+            <div class="app-copyright">
+              
+              <div>Copyright&copy; 2021, Connect with us on <a href="mailto:questionjsemail@gmail.com"><strong>questionjsemail@gmail.com</strong></a></div>
+            </div>
+            <div class="app-share">
+              <div class="social-share" data-social-share></div>
+            </div>
+          </div>
+        </footer>
+        <script>
+          const options = {
+            locale: {
+              copied: 'localized: Copied link!'
+            }
+          };
+          
+          
+          const element = document.querySelector('.social-share');
+          
+          if (element) {
+            new ensemble.SocialShare(element, options);
+          }
+          </script>
+      </div>
+</body>
+</html>

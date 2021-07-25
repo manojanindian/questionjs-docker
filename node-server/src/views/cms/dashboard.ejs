@@ -1,0 +1,67 @@
+<h3>Dashboard</h3>
+
+<div id="id01" class="modal">
+  <form class="question-form modal-content animate" method="post">
+    <div class="imgcontainer">
+      <span onclick="closeModel()" class="close" title="Close Modal">&times;</span>
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>Question</b></label>
+      <input type="text" id="question-action" />
+      <input type="text" id="question-id" />
+      <textarea  id="json-input" name="jsonInput" autocomplete="off">{}
+      </textarea>
+      <pre id="json-display"></pre>
+      <button id="submit-btn" type="submit">Update Question</button>
+    </div>
+  </form>
+</div>
+<div>
+  <button onclick="onClickAddQuestion()">Add Question</button>
+    <% for(let [index,question] of questions.entries() || []){  %>
+        <div class="question-wrapper">
+            <div class="question-text">
+                <%=question.question%>
+            </div>
+            <div class="question-action-wrapper">
+                <button onclick="onClickView('<%=question.questionId%>')" type="submit">View</button>
+                <% if(question.published){ %>
+                  <button onclick="onClickPublish('<%=question.questionId%>','<%=question.question%>', true)" type="submit">UnPublish</button>
+                <% } else { %>
+                  <button class="warningbtn" onclick="onClickPublish('<%=question.questionId%>','<%=question.question%>', false)" type="submit">Publish</button>
+                <% } %>
+            </div>
+        </div>
+
+        <%} %>
+    </div>
+
+    <script type="text/javascript">
+      function getJson() {
+          try {
+              return JSON.parse($('#json-input').val());
+          } catch (ex) {
+              alert('Wrong JSON Format: ' + ex);
+          }
+      }
+
+      var editor = new JsonEditor('#json-display', getJson());
+      
+
+      var form = document.querySelector(".question-form");
+      form.addEventListener("submit", questionAction);
+
+      function questionAction(e) {
+        e.preventDefault();
+        if($('#question-action').val() === 'update') {
+          updateQuestion();
+
+        }
+
+        if($('#question-action').val() === 'add') {
+          addQuestion();
+          
+        }
+      }
+  </script>

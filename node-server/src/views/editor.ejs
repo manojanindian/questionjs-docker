@@ -1,0 +1,33 @@
+<section class="app-section app-question-section">
+    <div class="app-solution" id="app-solution">
+       <div class="app-solution-code" id="div1">
+         <textarea id="code">
+
+/**
+ * <%- question.question %> 
+ * <%- question.unitTests[0].desc %>
+ */
+
+           
+function <%- question.functionName %> {
+  // write code here...
+  
+ 
+}</textarea>
+</div>
+<div class="unit-tests-result">
+  <pre id="unit-tests-result"></pre>
+</div>
+    </div>
+ </section>
+ <script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+      lineNumbers: true,
+      mode: "javascript",
+      theme: "blackboard",
+   });
+ </script>
+ <script>
+
+   const splitterBar = new SplitterBar(document.getElementById('app-solution'), document.getElementById('div1'), document.getElementById('unit-tests-result'));
+ </script>

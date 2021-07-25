@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 const Admin = require("../Models/admin");
 
 
@@ -19,7 +20,7 @@ const adminRegister = (req, res, next) => {
 						});
 					} else {
 						const admin = new Admin({
-							_id: new mongoose.Types.ObjectId(),
+							_id: mongoose.Types.ObjectId(),
 							email: req.body.email,
 							password: hash,
               name: req.body.name,
@@ -122,7 +123,7 @@ const adminLogin = (req, res, next) => {
 }
 
 const getMe = async (req, res) => {
-	const adminId = req.admin.adminId;
+	const adminId = req.user.adminId;
 	const admin = await Admin.findById(adminId);
 	if (admin) {
 		res.status(200).json({

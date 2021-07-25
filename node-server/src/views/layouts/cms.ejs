@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <meta name="author" content="Manoj Kumar" />
+    <title>CMS</title>
+    <link rel="stylesheet" href="../css/cms.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../js/jquery.json-editor.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/cms.services.js"></script>
+    <script>
+      if (window.location.pathname !== "/cms/login") {
+        isLoggedIn();
+      }
+    </script>
+</head>
+<body>
+    <div class="app-container">
+      <header class="app-header">
+        <h1>CMS</h1>
+        <button onclick="onClickSignOut()">Sign Out</button>
+      </header>
+      <%- body %>
+    </div>
+
+</body>
+</html>

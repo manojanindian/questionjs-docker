@@ -9,6 +9,6 @@ module.exports = function (req, res, next) {
     req.user = verified;
     next();
   } catch (err) {
-    res.status(400).send({ error: "auth failed, check auth-token222" });
+    res.status(400).send({ error: "auth failed, check auth-token" });
   }
 };
